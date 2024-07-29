@@ -68,20 +68,41 @@ void agregarHuesped(int &n_huesp, Huesped huespedes[], int Individual, int Doble
 void listarHuespedes(Huesped huespedes[30], int n_huesp){
 	
 	for (int i = 0; i<n_huesp; i++){
-		
-		cout << "Nombre: " << huespedes[n_huesp].Nombre << endl;
-		cout << "Telefono: " << huespedes[n_huesp].Telefono << endl;
-		cout << "DNI: " << huespedes[n_huesp].dni << endl;
-		cout << "Numero de habitacion: " << huespedes[n_huesp].hab.num_habi << endl;
-		cout << "Tipo de habitacion: " << huespedes[n_huesp].hab.tipo << endl;
-		
+
+		cout << "Nombre: " << huespedes[i].Nombre << endl;
+		cout << "Telefono: " << huespedes[i].Telefono << endl;
+		cout << "DNI: " << huespedes[i].dni << endl;
+		cout << "Numero de habitacion: " << huespedes[i].hab.num_habi << endl;
+		cout << "Tipo de habitacion: " << huespedes[i].hab.tipo << endl << endl;
+		cout << "------------------------------------" << endl;
 	}
 	
 	
 }
-void huespedesMenu(Huesped huespedes[], int &n_huesp, int Individual, int Doble, int Triple){
-	int opcion;
-		
+
+void eliminarHuesped(int &n_huesp, Huesped huespedes[], int indice,int &Individual, int &Doble, int &Triple){
+
+	if (indice >= 0 && indice < n_huesp){
+		if (huespedes[indice].hab.tipo == "Individual") {
+            Individual--;
+        } else if (huespedes[indice].hab.tipo == "Doble") {
+            Doble--;
+        } else if (huespedes[indice].hab.tipo == "Triple") {
+            Triple--;
+        }
+		for(int i = indice; i < n_huesp-1; ++i){
+			huespedes[i] = huespedes[i+1];
+			
+		}
+		n_huesp--;
+		cout << "Huesped eliminado..." << endl;
+	} 
+	
+	
+}
+void huespedesMenu(Huesped huespedes[], int n_huesp, int Individual, int Doble, int Triple){
+	int opcion, indice;
+	
     do {
     	cout << "\n" << endl;
         cout << "1. Agregar huesped" << endl;
@@ -97,7 +118,11 @@ void huespedesMenu(Huesped huespedes[], int &n_huesp, int Individual, int Doble,
             	agregarHuesped(n_huesp, huespedes, Individual, Doble, Triple); 
                 break;
             case 2:
-            	
+            	listarHuespedes(huespedes, n_huesp);
+            	cout << "Digite el indice del huesped  que desea eliminar: " << endl;
+				cin >> indice;
+				eliminarHuesped(n_huesp, huespedes, indice, Individual, Doble, Triple);
+
                 break;
             case 3:
             	listarHuespedes(huespedes, n_huesp);
