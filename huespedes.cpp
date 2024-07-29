@@ -51,6 +51,21 @@ void agregarHuesped(int &n_huesp, Huesped huespedes[], int Individual, int Doble
 	
 } 
 
+
+void listarHuespedes(Huesped huespedes[30], int n_huesp){
+	
+	for (int i = 0; i<n_huesp; i++){
+		
+		cout << "Nombre: " << huespedes[n_huesp].Nombre << endl;
+		cout << "Telefono: " << huespedes[n_huesp].Telefono << endl;
+		cout << "DNI: " << huespedes[n_huesp].dni << endl;
+		cout << "Numero de habitacion: " << huespedes[n_huesp].hab.num_habi << endl;
+		cout << "Tipo de habitacion: " << huespedes[n_huesp].hab.tipo << endl;
+		
+	}
+	
+	
+}
 void huespedesMenu(Huesped huespedes[], int &n_huesp, int Individual, int Doble, int Triple){
 	int opcion;
 		
@@ -72,7 +87,7 @@ void huespedesMenu(Huesped huespedes[], int &n_huesp, int Individual, int Doble,
             	
                 break;
             case 3:
-            
+            	listarHuespedes(huespedes, n_huesp);
                 break;
             case 4:
                 cout << "Regresando al menu inicial" << endl;
