@@ -1,6 +1,6 @@
 #include<iostream>
 #include "huespedes.h"
-
+#include <string.h>
 using namespace std;
 
 
@@ -21,15 +21,27 @@ void validNumHabitacion(int &validar, int n_huesp, Huesped huespedes[]){
 }
 
 void agregarHuesped(int &n_huesp, Huesped huespedes[], int Individual, int Doble, int Triple){
-	int validar;
+	int validar, long_dni;
 	if (n_huesp<30){
 	cout<<"Ingrese el nombre del nuevo huesped: ";
 	cin.ignore(); 
 	cin.getline(huespedes[n_huesp].Nombre, 30);
 	cout<<"Ingrese su número telefónico: ";
 	cin.getline(huespedes[n_huesp].Telefono, 10);
+	do{
+	
+	
 	cout<<"Ingrese su número de DNI: ";
-	cin.getline(huespedes[n_huesp].dni, 10);
+	cin.getline(huespedes[n_huesp].dni,10);
+	
+	long_dni = strlen(huespedes[n_huesp].dni);
+	
+	if(long_dni != 8){
+		cout << "DNI incorrecto. Vuelve a ingresar el dni. " << endl;
+	}
+	
+	}while(long_dni !=8);
+
 	cout<<"Ingrese el tipo de habitaci�n(Individual, Doble, Triple): ";
     cin.getline(huespedes[n_huesp].hab.tipo, 20);
     
@@ -140,3 +152,4 @@ void huespedesMenu(Huesped* huespedes, int& n_huesp, int Individual, int Doble, 
         
     } while (opcion != 4); //EN CASO SELECCIONAR EL NUMERO 4 REGRESA AL MENU ANTERIOR
 }
+
