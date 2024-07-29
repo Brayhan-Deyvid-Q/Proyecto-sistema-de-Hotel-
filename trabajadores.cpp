@@ -36,7 +36,6 @@ void agregarTrabajador(Trabajador trabajadores[], int &numTrabajadores) {
 }
 //void eliminarTrabajador
 
-//listarTrabajador
 
 void trabajadoresMenu(Trabajador trabajadores[], int &numTrabajadores) {
 	int opcion;
@@ -45,8 +44,7 @@ void trabajadoresMenu(Trabajador trabajadores[], int &numTrabajadores) {
     	cout << "\n" << endl;
         cout << "1. Agregar trabajador" << endl;
         cout << "2. Eliminar trabajador" << endl;
-        cout << "3. Check de trabajadores" << endl;
-        cout << "4. Regresar al menu principal" << endl << endl;
+        cout << "3. Regresar al menu principal" << endl<<endl;
         cout << "opción: ";
         cin >> opcion;
         cout << endl;
@@ -59,16 +57,13 @@ void trabajadoresMenu(Trabajador trabajadores[], int &numTrabajadores) {
             	//eliminarTrabajador 
                 break;
             case 3:
-            	//listarTrabajador
-                break;
-            case 4:
-                cout << "Regresando al menu inicial" << endl;
+            	cout << "Regresando al menu inicial" << endl;
                 break;
             default:
                 cout << "Valor ingresado incorrecto, vuelva a ingresar otro valor" << endl;
                 break;
         }
         
-    } while (opcion != 4); //EN CASO SELECCIONAR EL NUMERO 4 REGRESA AL MENU ANTERIOR
+    } while (opcion != 3); //EN CASO SELECCIONAR EL NUMERO 4 REGRESA AL MENU ANTERIOR
 }
 
