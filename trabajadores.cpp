@@ -34,7 +34,31 @@ void agregarTrabajador(Trabajador trabajadores[], int &numTrabajadores) {
 
     cout << "Trabajador agregado exitosamente." << endl;
 }
-//void eliminarTrabajador
+
+void eliminarTrabajador(Trabajador trabajadores[], int &numTrabajadores) {
+    int id;
+    bool encontrado = false;
+
+    cout << "Ingrese el ID del trabajador a eliminar: ";
+    cin >> id;
+
+    for (int i = 0; i < numTrabajadores; i++) {
+        if (trabajadores[i].id == id) {
+            // Encontramos al trabajador, lo eliminamos
+            for (int j = i; j < numTrabajadores - 1; j++) {
+                trabajadores[j] = trabajadores[j + 1];
+            }
+            numTrabajadores--;
+            encontrado = true;
+            cout << "Trabajador eliminado exitosamente." << endl;
+            break;
+        }
+    }
+
+    if (!encontrado) {
+        cout << "Trabajador con ID " << id << " no encontrado." << endl;
+    }
+}
 
 //listarTrabajador
 
@@ -56,7 +80,7 @@ void trabajadoresMenu(Trabajador trabajadores[], int &numTrabajadores) {
                 agregarTrabajador(trabajadores, numTrabajadores);
                 break;
             case 2:
-            	//eliminarTrabajador 
+            	eliminarTrabajador(trabajadores, numTrabajadores);
                 break;
             case 3:
             	//listarTrabajador
