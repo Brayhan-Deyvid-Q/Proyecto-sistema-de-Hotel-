@@ -84,7 +84,7 @@ void listarHuespedes(Huesped huespedes[30], int n_huesp){
 	
 	for (int i = 0; i<n_huesp; i++){
 
-		cout << "Nombre: " << huespedes[i].Nombre << endl;
+		cout << i <<"."<< "Nombre: " << huespedes[i].Nombre << endl;
 		cout << "Telefono: " << huespedes[i].Telefono << endl;
 		cout << "DNI: " << huespedes[i].dni << endl;
 		cout << "Numero de habitacion: " << huespedes[i].hab.num_habi << endl;
