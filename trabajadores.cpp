@@ -60,7 +60,18 @@ void eliminarTrabajador(Trabajador trabajadores[], int &numTrabajadores) {
     }
 }
 
-//listarTrabajador
+void listarTrabajadores(Trabajador trabajadores[], int numTrabajadores) {
+    if (numTrabajadores == 0) {
+        cout << "No hay trabajadores para mostrar." << endl;
+        return;
+    }
+
+    cout << "Lista de trabajadores:" << endl;
+    for (int i = 0; i < numTrabajadores; i++) {
+        cout << "ID: " << trabajadores[i].id << ", Nombre: " << trabajadores[i].nombretra
+             << ", Sueldo: " << trabajadores[i].sueldo << ", Cargo: " << trabajadores[i].cargo << endl;
+    }
+}
 
 void trabajadoresMenu(Trabajador trabajadores[], int &numTrabajadores) {
 	int opcion;
@@ -83,7 +94,7 @@ void trabajadoresMenu(Trabajador trabajadores[], int &numTrabajadores) {
             	eliminarTrabajador(trabajadores, numTrabajadores);
                 break;
             case 3:
-            	//listarTrabajador
+            	listarTrabajadores(trabajadores, numTrabajadores);
                 break;
             case 4:
                 cout << "Regresando al menu inicial" << endl;
