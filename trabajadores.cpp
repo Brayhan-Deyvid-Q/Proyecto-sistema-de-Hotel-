@@ -4,6 +4,26 @@
 
 using namespace std; 
 
+// Función para verificar si una cadena contiene solo letras
+bool soloLetras(const char* str) {
+    for (int i = 0; str[i] != '\0'; i++) {
+        char c = str[i];
+        if (c < 'A' || (c > 'Z' && c < 'a') || c > 'z') {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool soloDigitos(const char* str) {
+    for (int i = 0; str[i] != '\0'; i++) {
+        char c = str[i];
+        if (c < '0' || c > '9') {
+            return false;
+        }
+    }
+    return true;
+}
 
 void agregarTrabajador(Trabajador trabajadores[], int &numTrabajadores) {
     if (numTrabajadores >= MAX_TRABAJADORES) {
@@ -12,21 +32,52 @@ void agregarTrabajador(Trabajador trabajadores[], int &numTrabajadores) {
     }
 
     Trabajador nuevoTrabajador;
+    char tempNombre[MAX_NOMBRE_TRA];
+    char tempCargo[MAX_CARGO_TRA];
+    char tempID[10]; // Ajusta el tamaño según sea necesario
 
-    // Ingresar datos del trabajador
+    // Ingresar y validar el ID del trabajador
     cout << "Ingrese el ID del trabajador: ";
-    cin >> nuevoTrabajador.id;
+    cin >> tempID;
 
+    while (!soloDigitos(tempID)) {
+        cout << "Error: El ID debe ser un número. Ingrese nuevamente: ";
+        cin >> tempID;
+    }
+    nuevoTrabajador.id = 0;
+    for (int i = 0; tempID[i] != '\0'; i++) {
+        nuevoTrabajador.id = nuevoTrabajador.id * 10 + (tempID[i] - '0');
+    }
+
+    // Ingresar y validar el nombre del trabajador
     cout << "Ingrese el nombre del trabajador (máx. " << MAX_NOMBRE_TRA - 1 << " caracteres): ";
     cin.ignore(); // Limpiar el buffer de entrada
-    cin.getline(nuevoTrabajador.nombretra, MAX_NOMBRE_TRA);
+    cin.getline(tempNombre, MAX_NOMBRE_TRA);
 
+    while (!soloLetras(tempNombre)) {
+        cout << "Error: El nombre solo puede contener letras. Ingrese nuevamente: ";
+        cin.getline(tempNombre, MAX_NOMBRE_TRA);
+    }
+    // Copiar el nombre al trabajador
+    for (int i = 0; i < MAX_NOMBRE_TRA - 1 && tempNombre[i] != '\0'; i++) {
+        nuevoTrabajador.nombretra[i] = tempNombre[i];
+    }
+    nuevoTrabajador.nombretra[MAX_NOMBRE_TRA - 1] = '\0'; // Asegurar el final de la cadena
+
+    // Ingresar el sueldo del trabajador
     cout << "Ingrese el sueldo del trabajador: ";
     cin >> nuevoTrabajador.sueldo;
 
+    // Ingresar y validar el cargo del trabajador
     cout << "Ingrese el cargo del trabajador (máx. " << MAX_CARGO_TRA - 1 << " caracteres): ";
     cin.ignore(); // Limpiar el buffer de entrada
-    cin.getline(nuevoTrabajador.cargo, MAX_CARGO_TRA);
+    cin.getline(tempCargo, MAX_CARGO_TRA);
+
+    // Copiar el cargo al trabajador
+    for (int i = 0; i < MAX_CARGO_TRA - 1 && tempCargo[i] != '\0'; i++) {
+        nuevoTrabajador.cargo[i] = tempCargo[i];
+    }
+    nuevoTrabajador.cargo[MAX_CARGO_TRA - 1] = '\0'; // Asegurar el final de la cadena
 
     // Agregar el nuevo trabajador al arreglo
     trabajadores[numTrabajadores] = nuevoTrabajador;
@@ -59,6 +110,7 @@ void eliminarTrabajador(Trabajador trabajadores[], int &numTrabajadores) {
         cout << "Trabajador con ID " << id << " no encontrado." << endl;
     }
 }
+
 
 void listarTrabajadores(Trabajador trabajadores[], int numTrabajadores) {
     if (numTrabajadores == 0) {
