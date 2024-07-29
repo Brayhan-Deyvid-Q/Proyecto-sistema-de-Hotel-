@@ -13,6 +13,6 @@ struct Huesped {
     struct Habitaciones hab;
 };
 
-void huespedesMenu(Huesped huespedes[], int &n_huesp, int Individual, int Doble, int Triple);
+void huespedesMenu(Huesped* huespedes[], int &n_huesp, int Individual, int Doble, int Triple);
 	
 #endif

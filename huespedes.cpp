@@ -24,13 +24,16 @@ void agregarHuesped(int &n_huesp, Huesped huespedes[], int Individual, int Doble
 	int validar;
 	if (n_huesp<30){
 	cout<<"Ingrese el nombre del nuevo huesped: ";
-	cin>>huespedes[n_huesp].Nombre;
+	cin.ignore(); 
+	cin.getline(huespedes[n_huesp].Nombre, 30);
 	cout<<"Ingrese su nÃºmero telefÃ³nico: ";
-	cin>>huespedes[n_huesp].Telefono;
+	cin.getline(huespedes[n_huesp].Telefono, 10);
 	cout<<"Ingrese su nÃºmero de DNI: ";
-	cin>>huespedes[n_huesp].dni;
-	cout<<"Ingrese el tipo de habitación: ";
-	cin>>huespedes[n_huesp].hab.tipo;
+	cin.getline(huespedes[n_huesp].dni, 10);
+	cout<<"Ingrese el tipo de habitación(Individual, Doble, Triple): ";
+    cin.getline(huespedes[n_huesp].hab.tipo, 20);
+    
+
 	if (huespedes[n_huesp].hab.tipo=="Individual"){
 		if(Individual > 15){
 			cout << "Los habitaciones individuales se encuentran llenas.";
@@ -100,7 +103,7 @@ void eliminarHuesped(int &n_huesp, Huesped huespedes[], int indice,int &Individu
 	
 	
 }
-void huespedesMenu(Huesped huespedes[], int n_huesp, int Individual, int Doble, int Triple){
+void huespedesMenu(Huesped* huespedes, int& n_huesp, int Individual, int Doble, int Triple){
 	int opcion, indice;
 	
     do {
