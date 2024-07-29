@@ -5,14 +5,34 @@
 using namespace std; 
 
 // Función para verificar si una cadena contiene solo letras
-bool soloLetras(const char* str) {
+bool esLetra(char c) {
+    return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z');
+}
+bool esEspacio(char c) {
+    return c == ' ';
+}
+
+bool soloLetrasYEspacios(const char* str) {
     for (int i = 0; str[i] != '\0'; i++) {
         char c = str[i];
-        if (c < 'A' || (c > 'Z' && c < 'a') || c > 'z') {
+        if (!esLetra(c) && !esEspacio(c)) {
             return false;
         }
     }
     return true;
+}
+
+char aMayuscula(char c) {
+    if (c >= 'a' && c <= 'z') {
+        return c - 'a' + 'A';
+    }
+    return c;
+}
+
+void convertirAMayusculas(char* str) {
+    for (int i = 0; str[i] != '\0'; i++) {
+        str[i] = aMayuscula(str[i]);
+    }
 }
 
 bool soloDigitos(const char* str) {
@@ -50,34 +70,39 @@ void agregarTrabajador(Trabajador trabajadores[], int &numTrabajadores) {
     }
 
     // Ingresar y validar el nombre del trabajador
-    cout << "Ingrese el nombre del trabajador (máx. " << MAX_NOMBRE_TRA - 1 << " caracteres): ";
+    cout << "Ingrese el nombre del trabajador (max. " << MAX_NOMBRE_TRA - 1 << " caracteres): ";
     cin.ignore(); // Limpiar el buffer de entrada
     cin.getline(tempNombre, MAX_NOMBRE_TRA);
 
-    while (!soloLetras(tempNombre)) {
-        cout << "Error: El nombre solo puede contener letras. Ingrese nuevamente: ";
+    while (!soloLetrasYEspacios(tempNombre)) {
+        cout << "Error: El nombre solo puede contener letras y espacios. Ingrese nuevamente: ";
         cin.getline(tempNombre, MAX_NOMBRE_TRA);
     }
+
+    // Convertir el nombre a mayúsculas
+    convertirAMayusculas(tempNombre);
+
     // Copiar el nombre al trabajador
-    for (int i = 0; i < MAX_NOMBRE_TRA - 1 && tempNombre[i] != '\0'; i++) {
+    int i;
+    for (i = 0; i < MAX_NOMBRE_TRA - 1 && tempNombre[i] != '\0'; i++) {
         nuevoTrabajador.nombretra[i] = tempNombre[i];
     }
-    nuevoTrabajador.nombretra[MAX_NOMBRE_TRA - 1] = '\0'; // Asegurar el final de la cadena
+    nuevoTrabajador.nombretra[i] = '\0'; // Asegurar el final de la cadena
 
     // Ingresar el sueldo del trabajador
     cout << "Ingrese el sueldo del trabajador: ";
     cin >> nuevoTrabajador.sueldo;
 
     // Ingresar y validar el cargo del trabajador
-    cout << "Ingrese el cargo del trabajador (máx. " << MAX_CARGO_TRA - 1 << " caracteres): ";
+    cout << "Ingrese el cargo del trabajador (max. " << MAX_CARGO_TRA - 1 << " caracteres): ";
     cin.ignore(); // Limpiar el buffer de entrada
     cin.getline(tempCargo, MAX_CARGO_TRA);
 
     // Copiar el cargo al trabajador
-    for (int i = 0; i < MAX_CARGO_TRA - 1 && tempCargo[i] != '\0'; i++) {
+    for (i = 0; i < MAX_CARGO_TRA - 1 && tempCargo[i] != '\0'; i++) {
         nuevoTrabajador.cargo[i] = tempCargo[i];
     }
-    nuevoTrabajador.cargo[MAX_CARGO_TRA - 1] = '\0'; // Asegurar el final de la cadena
+    nuevoTrabajador.cargo[i] = '\0'; // Asegurar el final de la cadena
 
     // Agregar el nuevo trabajador al arreglo
     trabajadores[numTrabajadores] = nuevoTrabajador;
