@@ -5,11 +5,23 @@ using namespace std;
 
 
 
-//void validNumHabitacion(){
-	
-//}
+void validNumHabitacion(int &validar, int n_huesp, Huesped huespedes[]){
+	int i=0;
+	do{
+		while(i<n_huesp){
+			if (huespedes[i].hab.num_habi == validar || validar >30 || validar < 0){
+				cout << "La habitación se encuentra ocupada o no existe seleccione otro número de habitación."<<endl;
+				cin>> validar;
+			}else if(huespedes[i].hab.num_habi != validar && i==n_huesp){
+				cout << "Guardando cambios..."<<endl;
+			}
+			i++;	
+		}
+	}while(huespedes[i].hab.num_habi == validar || validar >30 || validar < 0);
+}
 
 void agregarHuesped(int &n_huesp, Huesped huespedes[], int Individual, int Doble, int Triple){
+	int validar;
 	if (n_huesp<30){
 	cout<<"Ingrese el nombre del nuevo huesped: ";
 	cin>>huespedes[n_huesp].Nombre;
@@ -40,8 +52,9 @@ void agregarHuesped(int &n_huesp, Huesped huespedes[], int Individual, int Doble
 	}
 	cout<<"Ingrese el número de la habitación: ";
 	cin>>huespedes[n_huesp].hab.num_habi;
-	//validNumHabitacion()
-	
+	validar = huespedes[n_huesp].hab.num_habi;
+	validNumHabitacion(validar, n_huesp, huespedes);
+	huespedes[n_huesp].hab.num_habi = validar;
 	cout<<endl;
 	n_huesp++;
 	cout<<"Se ha agregado un nuevo cliente de forma exitosa..."<<endl;
