@@ -24,6 +24,10 @@ Trabajador trabajadores[8]={{210, "Carlos Torres", 2500.0, "Recepcion"},
 
 int main(){
 	int opcion;
+	int Individual=3; //contador de habitaciones individuales
+	int Doble=3; //contador de habitaciones dobles 
+	int Triple=2; //contador de habitaciones triples
+	int n_huesp=8; //contador de huespedes
 
 	cout<<"\n----BIENVENIDOS AL HOTEL EL 'TELO'----\n" << endl;
 	

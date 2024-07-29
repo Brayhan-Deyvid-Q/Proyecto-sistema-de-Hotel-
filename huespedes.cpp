@@ -4,7 +4,54 @@
 using namespace std;
 
 
-void huespedesMenu(){
+
+//void validNumHabitacion(){
+	
+//}
+
+void agregarHuesped(int &n_huesp, Huesped huespedes[], int Individual, int Doble, int Triple){
+	if (n_huesp<30){
+	cout<<"Ingrese el nombre del nuevo huesped: ";
+	cin>>huespedes[n_huesp].Nombre;
+	cout<<"Ingrese su nÃºmero telefÃ³nico: ";
+	cin>>huespedes[n_huesp].Telefono;
+	cout<<"Ingrese su nÃºmero de DNI: ";
+	cin>>huespedes[n_huesp].dni;
+	cout<<"Ingrese el tipo de habitación: ";
+	cin>>huespedes[n_huesp].hab.tipo;
+	if (huespedes[n_huesp].hab.tipo=="Individual"){
+		if(Individual > 15){
+			cout << "Los habitaciones individuales se encuentran llenas.";
+		}else{
+		Individual++;
+		}
+	}else if(huespedes[n_huesp].hab.tipo=="Doble"){
+		if(Doble > 10){
+			cout << "Los habitaciones dobles se encuentran llenas.";
+		}else{
+		Doble++;
+		}
+	}else if(huespedes[n_huesp].hab.tipo=="Triple"){
+		if(Triple > 5){
+			cout << "Los habitaciones triples se encuentran llenas.";
+		}else{
+		Triple++;
+		}
+	}
+	cout<<"Ingrese el número de la habitación: ";
+	cin>>huespedes[n_huesp].hab.num_habi;
+	//validNumHabitacion()
+	
+	cout<<endl;
+	n_huesp++;
+	cout<<"Se ha agregado un nuevo cliente de forma exitosa..."<<endl;
+	}else{
+		cout<<"El hotel se encuentra lleno en este momento"<<endl;
+	}
+	
+} 
+
+void huespedesMenu(Huesped huespedes[], int &n_huesp, int Individual, int Doble, int Triple){
 	int opcion;
 		
     do {
@@ -19,7 +66,7 @@ void huespedesMenu(){
         // SWITCH PARA SELECIONAR LAS DIFERENTES OPCIONES DEL MENU CARTA
         switch (opcion) {
             case 1:
-            	
+            	agregarHuesped(n_huesp, huespedes, Individual, Doble, Triple); 
                 break;
             case 2:
             	
