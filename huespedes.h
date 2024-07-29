@@ -13,6 +13,6 @@ struct Huesped {
     struct Habitaciones hab;
 };
 
-void huespedesHotel();
+void huespedesMenu();
 	
 #endif
