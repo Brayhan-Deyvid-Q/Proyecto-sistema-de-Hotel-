@@ -43,7 +43,7 @@ int main(){
 	    
 	    switch(opcion){
 	    	case 1:
-	    	
+	    		huespedesMenu(huespedes, n_huesp, Individual, Doble, Triple);
 	    		break;
 	    	case 2:
 	    	
