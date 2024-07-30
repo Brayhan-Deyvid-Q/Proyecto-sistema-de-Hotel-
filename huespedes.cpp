@@ -4,13 +4,13 @@
 using namespace std;
 
 
-
+//FUNCION DE VALIDAR EL NUMERO DE HABITACION
 void validNumHabitacion(int &validar, int n_huesp, Huesped huespedes[]){
 	int i=0;
 	do{
 		while(i<n_huesp){
 			if (huespedes[i].hab.num_habi == validar || validar >30 || validar < 0){
-				cout << "La habitación se encuentra ocupada o no existe seleccione otro número de habitación."<<endl;
+				cout << "La habitacion se encuentra ocupada o no existe seleccione otro numero de habitacion."<<endl;
 				cin>> validar;
 			}else if(huespedes[i].hab.num_habi != validar && i==n_huesp){
 				cout << "Guardando cambios..."<<endl;
@@ -20,20 +20,22 @@ void validNumHabitacion(int &validar, int n_huesp, Huesped huespedes[]){
 	}while(huespedes[i].hab.num_habi == validar || validar >30 || validar < 0);
 }
 
+//FuNCION PARA PODER AGREGAR A UN HUESPED
 void agregarHuesped(int &n_huesp, Huesped huespedes[], int Individual, int Doble, int Triple){
 	int validar, long_dni;
 	if (n_huesp<30){
 	cout<<"Ingrese el nombre del nuevo huesped: ";
 	cin.ignore(); 
 	cin.getline(huespedes[n_huesp].Nombre, 30);
-	cout<<"Ingrese su nÃºmero telefÃ³nico: ";
+	cout<<"Ingrese su numero telefonico: ";
 	cin.getline(huespedes[n_huesp].Telefono, 10);
 	do{
 	
 	
-	cout<<"Ingrese su nÃºmero de DNI: ";
+	cout<<"Ingrese su numero de DNI: ";
 	cin.getline(huespedes[n_huesp].dni,10);
 	
+	//VALIDACION DEL DNI 
 	long_dni = strlen(huespedes[n_huesp].dni);
 	
 	if(long_dni != 8){
@@ -48,7 +50,7 @@ void agregarHuesped(int &n_huesp, Huesped huespedes[], int Individual, int Doble
 
 	if (huespedes[n_huesp].hab.tipo=="Individual"){
 		if(Individual > 15){
-			cout << "Los habitaciones individuales se encuentran llenas.";
+			cout << "Los habitaciones individuales se encuentran llenas.";  
 		}else{
 		Individual++;
 		}
@@ -65,10 +67,10 @@ void agregarHuesped(int &n_huesp, Huesped huespedes[], int Individual, int Doble
 		Triple++;
 		}
 	}
-	cout<<"Ingrese el número de la habitación: ";
+	cout<<"Ingrese el numero de la habitacion: ";
 	cin>>huespedes[n_huesp].hab.num_habi;
 	validar = huespedes[n_huesp].hab.num_habi;
-	validNumHabitacion(validar, n_huesp, huespedes);
+	validNumHabitacion(validar, n_huesp, huespedes);//FUNCION DE VALIDAD EL NUMERO DE HABITACION
 	huespedes[n_huesp].hab.num_habi = validar;
 	cout<<endl;
 	n_huesp++;
@@ -79,7 +81,7 @@ void agregarHuesped(int &n_huesp, Huesped huespedes[], int Individual, int Doble
 	
 } 
 
-
+//FUNCION DE LISTAR LOS HUESPEDES YA REGISTRADOS
 void listarHuespedes(Huesped huespedes[30], int n_huesp){
 	
 	for (int i = 0; i<n_huesp; i++){
@@ -94,7 +96,7 @@ void listarHuespedes(Huesped huespedes[30], int n_huesp){
 	
 	
 }
-
+//FUNCION DE ELIMINAR A UN HUESPED
 void eliminarHuesped(int &n_huesp, Huesped huespedes[], int indice,int &Individual, int &Doble, int &Triple){
 
 	if (indice >= 0 && indice < n_huesp){
@@ -113,18 +115,19 @@ void eliminarHuesped(int &n_huesp, Huesped huespedes[], int indice,int &Individu
 		cout << "Huesped eliminado..." << endl;
 	} 
 	
-	
+//FUNCION DEL MENU DE HUESPEDES	
 }
 void huespedesMenu(Huesped* huespedes, int& n_huesp, int Individual, int Doble, int Triple){
 	int opcion, indice;
 	
     do {
+    	//MENU DE HUESPED
     	cout << "\n" << endl;
         cout << "1. Agregar huesped" << endl;
         cout << "2. Eliminar huesped" << endl;
         cout << "3. Lista de huespedes" << endl;
-        cout << "4. Regresar al menu principal" << endl << endl;
-        cout << "opción: ";
+        cout << "4. Regresar al menu principal" << endl;
+        cout << "Opcion: ";
         cin >> opcion;
         cout << endl;
         // SWITCH PARA SELECIONAR LAS DIFERENTES OPCIONES DEL MENU CARTA

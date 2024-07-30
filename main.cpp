@@ -35,8 +35,10 @@ int main() {
     int Doble = 3; // contador de habitaciones dobles
     int Triple = 2; // contador de habitaciones triples
     int n_huesp = 8; // contador de huespedes
-
-    cout << "\n----BIENVENIDOS AL HOTEL EL 'TELO'----\n" << endl;
+	
+	cout << "*****************************************************" << endl;
+    cout << "          .:BIENVENIDOS AL HOTEL EL 'TELO':.        " << endl;
+    cout << "*****************************************************" << endl << endl;
 
     while (opcion != 3) { // Impresión del menú en la pantalla
         cout << "Seleccione una opción:" << endl;
