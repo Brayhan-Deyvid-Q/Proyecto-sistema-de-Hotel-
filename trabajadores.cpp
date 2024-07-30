@@ -84,7 +84,7 @@ float convertirASueldo(const char* str) {
 
 void agregarTrabajador(Trabajador trabajadores[], int &numTrabajadores) {
     if (numTrabajadores >= MAX_TRABAJADORES) {
-        cout << "No se pueden agregar más trabajadores. La lista está llena." << endl;
+        cout << "No se pueden agregar mas trabajadores. La lista está llena." << endl;
         return;
     }
 
@@ -99,7 +99,7 @@ void agregarTrabajador(Trabajador trabajadores[], int &numTrabajadores) {
     cin >> tempID;
 
     while (!soloDigitos(tempID)) {
-        cout << "Error: El ID debe ser un número. Ingrese nuevamente: ";
+        cout << "Error: El ID debe ser un numero. Ingrese nuevamente: ";
         cin >> tempID;
     }
     nuevoTrabajador.id = 0;
@@ -130,11 +130,11 @@ void agregarTrabajador(Trabajador trabajadores[], int &numTrabajadores) {
     nuevoTrabajador.nombretra[i] = '\0';
 
     // Ingresar y validar el sueldo del trabajador
-    cout << "Ingrese el sueldo del trabajador (número positivo con hasta dos decimales): ";
+    cout << "Ingrese el sueldo del trabajador (numero positivo con hasta dos decimales): ";
     cin.getline(tempSueldo, 20);
 
     while (!soloDigitosYPunto(tempSueldo)) {
-        cout << "Error: El sueldo debe ser un número positivo con hasta dos decimales. Ingrese nuevamente: ";
+        cout << "Error: El sueldo debe ser un numero positivo con hasta dos decimales. Ingrese nuevamente: ";
         cin.getline(tempSueldo, 20);
     }
 

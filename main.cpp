@@ -41,7 +41,7 @@ int main() {
     cout << "*****************************************************" << endl << endl;
 
     while (opcion != 3) { // Impresión del menú en la pantalla
-        cout << "Seleccione una opción:" << endl;
+        cout << "Seleccione una opcion:" << endl;
         cout << "1) Huespedes y habitaciones" << endl;
         cout << "2) Trabajadores" << endl;
         cout << "3) Salir del programa" << endl;
