@@ -17,14 +17,14 @@ Huesped huespedes[30] = {
 };
 
 Trabajador trabajadores[MAX_TRABAJADORES] = {
-    {210, "Carlos Torres", 2500.0, "Recepcion"},
-    {211, "Andres Leyva", 2500.0, "Recepcion"},
-    {212, "Mario Roque", 3400.0, "Mantenimiento"},
-    {213, "Kevin Ramirez", 3400.0, "Mantemiento"},
-    {214, "Diego Salazar", 2700.0, "Pisos"},
-    {215, "Laura Montes", 2700.0, "Pisos"},
-    {216, "Manuela Linares", 3000.0, "Hosteleria"},
-    {217, "Maria Ortega", 3000.0, "Hosteleria"}
+    {210, "CARLOS TORRES", 2500.0, "Recepcion"},
+    {211, "ANDRES LEYVA", 2500.0, "Recepcion"},
+    {212, "MARIO ROQUE", 3400.0, "Mantenimiento"},
+    {213, "KEVIN RAMIREZ", 3400.0, "Mantemiento"},
+    {214, "DIEGO Salazar", 2700.0, "Pisos"},
+    {215, "LAURA Montes", 2700.0, "Pisos"},
+    {216, "MANUELA LINARES", 3000.0, "Hosteleria"},
+    {217, "MARIA ORTEGA", 3000.0, "Hosteleria"}
 };
 
 int numTrabajadores = 8;
@@ -45,7 +45,7 @@ int main() {
         cout << "1) Huespedes y habitaciones" << endl;
         cout << "2) Trabajadores" << endl;
         cout << "3) Salir del programa" << endl;
-        cout << "Opción: ";
+        cout << "Opcion: ";
         cin >> opcion;
         cout << endl;
 
@@ -60,7 +60,7 @@ int main() {
                 cout << "Saliendo...";
                 break;
             default:
-                cout << "ERROR: Alternativa no válida, intente de nuevo..." << endl << endl;
+                cout << "ERROR: Alternativa no valida, intente de nuevo..." << endl << endl;
                 break;
         }
     }
