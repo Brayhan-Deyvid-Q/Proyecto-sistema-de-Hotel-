@@ -1,4 +1,3 @@
-
 #include<iostream>
 #include "trabajadores.h"
 
@@ -45,6 +44,44 @@ bool soloDigitos(const char* str) {
     return true;
 }
 
+bool soloDigitosYPunto(const char* str) {
+    bool puntoEncontrado = false;
+    for (int i = 0; str[i] != '\0'; i++) {
+        char c = str[i];
+        if (c == '.') {
+            if (puntoEncontrado) {
+                return false;  // Solo se permite un punto decimal
+            }
+            puntoEncontrado = true;
+        } else if (c < '0' || c > '9') {
+            return false;  // Caracter no válido
+        }
+    }
+    return true;
+}
+
+float convertirASueldo(const char* str) {
+    float resultado = 0.0f;
+    float factor = 1.0f;
+    bool puntoEncontrado = false;
+
+    for (int i = 0; str[i] != '\0'; i++) {
+        char c = str[i];
+        if (c == '.') {
+            puntoEncontrado = true;
+            factor = 0.1f;
+        } else if (c >= '0' && c <= '9') {
+            if (puntoEncontrado) {
+                resultado += (c - '0') * factor;
+                factor *= 0.1f;
+            } else {
+                resultado = resultado * 10 + (c - '0');
+            }
+        }
+    }
+	return resultado;
+}
+
 void agregarTrabajador(Trabajador trabajadores[], int &numTrabajadores) {
     if (numTrabajadores >= MAX_TRABAJADORES) {
         cout << "No se pueden agregar más trabajadores. La lista está llena." << endl;
@@ -54,7 +91,8 @@ void agregarTrabajador(Trabajador trabajadores[], int &numTrabajadores) {
     Trabajador nuevoTrabajador;
     char tempNombre[MAX_NOMBRE_TRA];
     char tempCargo[MAX_CARGO_TRA];
-    char tempID[10]; // Ajusta el tamaño según sea necesario
+    char tempID[10];
+    char tempSueldo[20]; // Buffer para el sueldo como cadena
 
     // Ingresar y validar el ID del trabajador
     cout << "Ingrese el ID del trabajador: ";
@@ -69,9 +107,11 @@ void agregarTrabajador(Trabajador trabajadores[], int &numTrabajadores) {
         nuevoTrabajador.id = nuevoTrabajador.id * 10 + (tempID[i] - '0');
     }
 
+    // Limpiar el buffer de entrada después de leer el ID
+    cin.ignore();
+
     // Ingresar y validar el nombre del trabajador
     cout << "Ingrese el nombre del trabajador (max. " << MAX_NOMBRE_TRA - 1 << " caracteres): ";
-    cin.ignore(); // Limpiar el buffer de entrada
     cin.getline(tempNombre, MAX_NOMBRE_TRA);
 
     while (!soloLetrasYEspacios(tempNombre)) {
@@ -87,22 +127,29 @@ void agregarTrabajador(Trabajador trabajadores[], int &numTrabajadores) {
     for (i = 0; i < MAX_NOMBRE_TRA - 1 && tempNombre[i] != '\0'; i++) {
         nuevoTrabajador.nombretra[i] = tempNombre[i];
     }
-    nuevoTrabajador.nombretra[i] = '\0'; // Asegurar el final de la cadena
+    nuevoTrabajador.nombretra[i] = '\0';
 
-    // Ingresar el sueldo del trabajador
-    cout << "Ingrese el sueldo del trabajador: ";
-    cin >> nuevoTrabajador.sueldo;
+    // Ingresar y validar el sueldo del trabajador
+    cout << "Ingrese el sueldo del trabajador (número positivo con hasta dos decimales): ";
+    cin.getline(tempSueldo, 20);
+
+    while (!soloDigitosYPunto(tempSueldo)) {
+        cout << "Error: El sueldo debe ser un número positivo con hasta dos decimales. Ingrese nuevamente: ";
+        cin.getline(tempSueldo, 20);
+    }
+
+    // Convertir el sueldo de cadena a flotante
+    nuevoTrabajador.sueldo = convertirASueldo(tempSueldo);
 
     // Ingresar y validar el cargo del trabajador
     cout << "Ingrese el cargo del trabajador (max. " << MAX_CARGO_TRA - 1 << " caracteres): ";
-    cin.ignore(); // Limpiar el buffer de entrada
     cin.getline(tempCargo, MAX_CARGO_TRA);
 
     // Copiar el cargo al trabajador
     for (i = 0; i < MAX_CARGO_TRA - 1 && tempCargo[i] != '\0'; i++) {
         nuevoTrabajador.cargo[i] = tempCargo[i];
     }
-    nuevoTrabajador.cargo[i] = '\0'; // Asegurar el final de la cadena
+    nuevoTrabajador.cargo[i] = '\0';
 
     // Agregar el nuevo trabajador al arreglo
     trabajadores[numTrabajadores] = nuevoTrabajador;
@@ -136,7 +183,6 @@ void eliminarTrabajador(Trabajador trabajadores[], int &numTrabajadores) {
     }
 }
 
-
 void listarTrabajadores(Trabajador trabajadores[], int numTrabajadores) {
     if (numTrabajadores == 0) {
         cout << "No hay trabajadores para mostrar." << endl;
@@ -144,11 +190,20 @@ void listarTrabajadores(Trabajador trabajadores[], int numTrabajadores) {
     }
 
     cout << "Lista de trabajadores:" << endl;
+    float sumaSueldos = 0.0f; // Variable para almacenar la suma de sueldos
+
     for (int i = 0; i < numTrabajadores; i++) {
-        cout << "ID: " << trabajadores[i].id << ", Nombre: " << trabajadores[i].nombretra
-             << ", Sueldo: " << trabajadores[i].sueldo << ", Cargo: " << trabajadores[i].cargo << endl;
+        cout << "ID: " << trabajadores[i].id
+             << ", Nombre: " << trabajadores[i].nombretra
+             << ", Sueldo: " << trabajadores[i].sueldo
+             << ", Cargo: " << trabajadores[i].cargo << endl;
+        
+        sumaSueldos += trabajadores[i].sueldo; // Acumular el sueldo
     }
+
+    cout << "Suma total de los sueldos de los trabajadores: " << sumaSueldos << endl;
 }
+
 
 void trabajadoresMenu(Trabajador trabajadores[], int &numTrabajadores) {
 	int opcion;
@@ -159,7 +214,7 @@ void trabajadoresMenu(Trabajador trabajadores[], int &numTrabajadores) {
         cout << "2. Eliminar trabajador" << endl;
         cout << "3. Check de trabajadores" << endl;
         cout << "4. Regresar al menu principal" << endl << endl;
-        cout << "opción: ";
+        cout << "Opcion: ";
         cin >> opcion;
         cout << endl;
         // SWITCH PARA SELECIONAR LAS DIFERENTES OPCIONES DEL MENU CARTA
