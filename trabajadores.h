@@ -1,7 +1,7 @@
 #ifndef TRABAJADORES_H
 #define TRABAJADORES_H
 
-const int MAX_TRABAJADORES = 20; // Asegúrate de que este valor sea suficiente para tu uso
+const int MAX_TRABAJADORES = 20; // Asegurate de que este valor sea suficiente para tu uso
 
 const int MAX_NOMBRE_TRA = 30;
 const int MAX_CARGO_TRA = 30;
